@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nachricht hinterlassen</title>
+</head>
+<body>
+  <header>
+    <h1>Hallo! Schön, dass du hier bist!</h1>
+    <p>Ich bin gerade beschäftigt, aber hinterlasse mir doch gerne eine Nachricht!</p>
+  </header>
+
+  <main>
+    <form id="message-form" action="#" method="post">
+      <label for="message">Deine Nachricht</label>
+      <textarea
+        id="message"
+        name="message"
+        rows="6"
+        placeholder="Trag' hier deine Nachricht für mich ein!"
+        required
+      ></textarea>
+
+      <label for="name">Dein Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Trag' hier noch deinen Namen ein!"
+        required
+      />
+
+      <button type="submit">Nachricht absenden</button>
+    </form>
+
+    <section aria-labelledby="messages-heading">
+      <h2 id="messages-heading">Diese Nachrichten wurden bereits für mich hinterlassen:</h2>
+      <ul id="message-list">
+        <!-- Nachrichten kommen später per JavaScript aus Supabase hier rein -->
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
