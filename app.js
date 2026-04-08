@@ -25,13 +25,29 @@ function formatMessageDate(isoString) {
 function addMessageToList(name, content, createdAt) {
   const list = document.getElementById("message-list");
   const li = document.createElement("li");
-  const title = document.createElement("h3");
-  const body = document.createElement("p");
-  const timeEl = document.createElement("time");
+  const head = document.createElement("div");
+  head.className = "message-head";
 
-  title.textContent = "Nachricht von " + name;
+  const avatar = document.createElement("span");
+  avatar.className = "message-avatar";
+  avatar.setAttribute("aria-hidden", "true");
+  avatar.textContent = getNameInitial(name);
+
+  const title = document.createElement("h3");
+  title.className = "message-name";
+  const srOnly = document.createElement("span");
+  srOnly.className = "sr-only";
+  srOnly.textContent = "Nachricht von ";
+  title.appendChild(srOnly);
+  title.appendChild(document.createTextNode(name));
+
+  head.appendChild(avatar);
+  head.appendChild(title);
+
+  const body = document.createElement("p");
   body.textContent = content;
 
+  const timeEl = document.createElement("time");
   const formatted = formatMessageDate(createdAt);
   if (formatted !== "") {
     timeEl.dateTime = createdAt;
@@ -39,12 +55,20 @@ function addMessageToList(name, content, createdAt) {
     timeEl.className = "message-time";
   }
 
-  li.appendChild(title);
+  li.appendChild(head);
   li.appendChild(body);
   if (formatted !== "") {
     li.appendChild(timeEl);
   }
   list.appendChild(li);
+}
+
+function getNameInitial(name) {
+  const trimmed = name.trim();
+  if (trimmed === "") {
+    return "?";
+  }
+  return trimmed.charAt(0).toUpperCase();
 }
 
 async function loadMessages() {

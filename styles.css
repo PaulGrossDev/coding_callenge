@@ -147,10 +147,33 @@ button[type="submit"]:active {
   background-color: #faf8f2;
 }
 
-#message-list li h3 {
+.message-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.message-avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #3d5c4e;
+  color: #fffef9;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: center;
+}
+
+.message-name {
+  position: relative;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 16px;
-  margin: 0 0 10px;
+  margin: 0;
   font-weight: normal;
   color: #2a2824;
 }
@@ -169,6 +192,18 @@ button[type="submit"]:active {
   line-height: 1.3;
   color: #6e6a64;
   font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 @media (max-width: 520px) {
