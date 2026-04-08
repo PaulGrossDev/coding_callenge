@@ -5,17 +5,45 @@ function clearMessageList() {
   list.innerHTML = "";
 }
 
-function addMessageToList(name, content) {
+function formatMessageDate(isoString) {
+  if (!isoString) {
+    return "";
+  }
+  const date = new Date(isoString);
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+  return date.toLocaleString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+function addMessageToList(name, content, createdAt) {
   const list = document.getElementById("message-list");
   const li = document.createElement("li");
   const title = document.createElement("h3");
   const body = document.createElement("p");
+  const timeEl = document.createElement("time");
 
   title.textContent = "Nachricht von " + name;
   body.textContent = content;
 
+  const formatted = formatMessageDate(createdAt);
+  if (formatted !== "") {
+    timeEl.dateTime = createdAt;
+    timeEl.textContent = formatted;
+    timeEl.className = "message-time";
+  }
+
   li.appendChild(title);
   li.appendChild(body);
+  if (formatted !== "") {
+    li.appendChild(timeEl);
+  }
   list.appendChild(li);
 }
 
@@ -44,7 +72,7 @@ async function loadMessages() {
 
   for (let i = 0; i < data.length; i++) {
     const row = data[i];
-    addMessageToList(row.name, row.content);
+    addMessageToList(row.name, row.content, row.created_at);
   }
 }
 
